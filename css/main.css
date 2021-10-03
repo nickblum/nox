@@ -1,0 +1,141 @@
+/* ==========================================================================
+SITE STRUCTURE
+========================================================================== */
+:root {
+    --main-bg: #1f2020;
+    --main-bg-light: #4e5050;
+    --main-bg-hover: #777979;
+    --main-fg: #dddcde;
+    --main-fg-hover: #c7c7c7;
+    --main-fg-highlight: #ebe9ec;
+    --main-width: 400px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+
+html { 
+    background-color: var(--main-bg);
+    color: var(--main-fg);
+    height:100%;
+    width:100%;
+}
+nav {
+    display: block;
+    height: 60px;
+}
+main {
+    padding: 10px 20px;
+}
+
+table {
+    border: 2px solid var(--main-fg);
+    border-radius: .5em;
+    margin: .5%; 
+    border-collapse:separate;
+    border-spacing: 0;
+    padding: .5em;
+    width:99%;
+}
+    th {
+        font-weight: 700;
+        text-align: left;
+    }
+    th, td {
+        padding: 4px;
+    }
+
+/**
+* === FORM ELEMENTS ===
+*/
+form {
+    width: 100%;
+    max-width: var(--main-width);
+    float:left;
+}
+fieldset {
+    padding: 16px;
+    float: left;
+    border-radius: .5em;
+    border-color: var(--main-bg-light);
+}
+fieldset legend {
+    padding: 0 .5em;      
+    font-size: x-large; 
+    color: var(--main-bg-hover); 
+}
+.button,
+.text {
+    height:40px; 
+    color: var(--main-fg);
+    background-color: var(--main-bg);
+    border:2px solid var(--main-fg-hover);
+    border-radius: .5em;
+    box-sizing: border-box;
+    margin: .5% ;
+    float:left;
+    padding: 6px 12px;
+    font-size: large;
+}
+.button{
+    cursor:pointer;
+}
+.text { 
+    width: 100%;
+}
+.button:focus, .text:focus{
+    outline: none !important;
+    box-shadow: 0 0 6px #949597;
+}
+
+@media (hover: hover) {
+    .button:hover {
+        background-color: var(--main-bg-hover);
+    }
+}
+
+.button-sector {
+    width: 100%;
+    background-color: var( --main-bg-light ); 
+    text-align: left;   
+}
+
+
+
+
+
+/* ==========================================================================
+MODULE-SPECIFIC STYLES
+========================================================================== */
+.polysvg {
+    max-width: 1000px;
+}
+    .polymap,
+    .polymap-active,
+    .polymap-parent {
+        stroke: var(--main-fg);
+        stroke-width:2px;
+        fill: var(--main-bg);
+    }
+    .polymap,
+    .polymap-active {
+        stroke-width:2px;
+    }
+    
+    .polymap-active {
+        fill: var(--main-bg-hover);
+    }
+
+    @media (hover: hover) {
+        .polymap:hover {
+            fill: var(--main-bg-hover);
+        }
+    }
+
+    .polymap:hover {
+        cursor: pointer;
+    }
