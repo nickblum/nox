@@ -1,17 +1,32 @@
 <?php
+session_start();// because ajax?
 $sectorID = $_POST['sector_id'];
 
-$html = <<<HTML
-
-SECTOR
-
-HTML;
-
 $ret = new StdClass();
-$ret->data = $html;
 $ret->haserror = false;
 
+// GET SECTOR DATA
+$conn = new mysqli($_SESSION["servername"], $_SESSION["username"], $_SESSION["password"], $_SESSION["dbname"]);
+if ($conn->connect_error) {
+    // probably need to put this in an error log or something
+    //$ret->error = $conn->connect_error;
+}
+$stmt = $conn->prepare("SELECT * FROM sectors WHERE sector_id=?");
+$stmt->bind_param("i",$sectorID);
+$stmt->execute();
+$result = $stmt->get_result();
+$ret->qry = $result->fetch_all(MYSQLI_ASSOC);
+$conn->close();
+
+// OUTPUT HTML
+$ret->data = $ret->qry[0]['title'];
+/*
+<<<HTML
+SECTOR $sectorID ($ret->qry[0]->title)
+HTML;*/
+
 echo json_encode($ret);
+
 
 /*
 <script>

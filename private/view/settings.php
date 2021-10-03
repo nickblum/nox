@@ -6,20 +6,28 @@ $sectorQry = getNavSectors();
 $qry = $sectorQry->data;
 $sectorDsp = '';
 while($row = $qry->fetch_assoc()) {
-    $sectorDsp .= '<input type="button" class="button button-sector" sector_id="' . $row['sector_id'] . '" onclick="NOX.SETTING.editSector(this);" value="' . $row['title'] . '">';
+    $sectorDsp .= '<input type="button" class="button button-sector" sector_id="' . $row['sector_id'] . '" value="' . $row['title'] . '">';
 }
 
 $html = <<<HTML
-<form>
+<form id="sectorBox">
     <fieldset>
         <legend>Sectors</legend>
         $sectorDsp
-        <input placeholder="New Sector..." type="text" class="text">
+        <input placeholder="New Sector..." autocomplete="off" id="addSector" type="text" class="text">
     </fieldset>
 </form>
-<div id="">
-
-</div>
+<form id="sectorEditBox">
+    <fieldset>
+        <legend></legend>
+        <div id="sectorEditButtonBox">
+            <input type="button" class="button" onclick="NOX.SETTINGS.cancelEdit();" value="<-">
+            <input type="button" class="button" value="[S]">
+            <input type="button" class="button" value="[T]">
+        </div>
+        <input placeholder="Sector Title (optional)" autocomplete="off" id="secTitle" type="text" class="text">
+    </fieldset>
+</form>
 HTML;
 
 $ret = new StdClass();

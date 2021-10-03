@@ -12,7 +12,7 @@ function getNavSectors(){ //function parameters, two variables.
         $ret->error = $conn->connect_error;
     }
 
-    $sql = "SELECT * FROM sectors ORDER BY title";
+    $sql = "SELECT * FROM sectors ORDER BY sector_id";
     $ret->data = $conn->query($sql);
 
     $conn->close();

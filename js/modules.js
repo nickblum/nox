@@ -10,7 +10,7 @@ var NOX = ( function(){
       // initialize sub modules...
       NOX.NAV.init();
       NOX.POLY.init();
-
+      NOX.SETTINGS.init();
     }
   }
 })();
@@ -22,8 +22,15 @@ NOX.NAV = ( function(){
   var $hamburger;
   var $navdsp;
   var $main;
+  var $menuBox;
 
-  var load = function( el, label ){
+  var load = function(){
+    var el = this; // calling radio
+
+    // collapse menu
+    $hamburger.prop('checked','false').trigger('click');
+
+    // load page
     $.ajax({
       url: 'private/view/'+el.getAttribute('page'),
       type: 'post',  
@@ -33,27 +40,42 @@ NOX.NAV = ( function(){
               console.log(result);
               $main.empty();
               $main[0].insertAdjacentHTML('afterbegin', result.data);
-              $navdsp.html( label );
+              $navdsp.html( el.nextSibling.innerHTML );
           },
           error:function(){ alert('KABOOOOM!!'); }
       });
   }
 
+  // Dynamically add another menu item in the "sector" group -- probably called from settings.js
+  var insertSector = function(title, sectorID){
+    $lastNav = $('.subitem').last().parent();
+    $newNav = $lastNav.clone();
+    $newNav.find('input').attr('sector_id',sectorID);
+    $newNav.find('span').html(title);
+    $newNav.find('.navrad').on('click',load);
+    $lastNav.after($newNav);
+  }
+
   return {
+    insertSector:insertSector,
     init: function(){
       $main = $('#main')
       $hamburger = $('#hamburger');
       $navdsp = $('#navdsp');
+      $menuBox = $('#menuToggle');
 
-      // Add event listeners
-      // need to clean this up, change to .on( '', myFunction ); syntax
-      $('.navrad').on('click', function(){
-        $hamburger.prop('checked','false').trigger('click');
-        load( this, this.nextSibling.innerHTML );
+      // add listeners
+      $('.navrad').on('click',load);
+
+      // collapse nav menu when click outside
+      $(document).click(function(e) {
+        if (!$(e.target).is($menuBox) && !$menuBox.has(e.target).length ) {
+          $hamburger.prop('checked','false').trigger('click');
+        } 
       });
       
       // load homestead/dashboard on init
-      $( '.navrad:eq(3)' ).trigger('click');
+      $( '.navrad' ).eq(-2).trigger('click');
     }
   }
 })();
@@ -79,24 +101,6 @@ NOX.POLY = ( function(){
     }
   }
 })();
-
-NOX.SETTING = ( function(){
-
-  var editSector = function( btn ){
-    //alert( btn.getAttribute("sector_id") );
-
-    
-  }
-
-  return {
-    editSector: editSector,
-    init: function(){
-      
-      
-    }
-  }
-})();
-
 
 /*
 function waterTest(btn){

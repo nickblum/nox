@@ -1,7 +1,7 @@
 CREATE TABLE sectors (
     sector_id SERIAL PRIMARY KEY,
-    parent_id INTEGER,
     title VARCHAR(100) -- if parent_id is null, display in nav links
+    parent_id INTEGER,
 );
 
 ---------------------- 

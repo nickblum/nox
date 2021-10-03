@@ -84,6 +84,11 @@ fieldset legend {
 .button{
     cursor:pointer;
 }
+.button:disabled{
+    background-color: var(--main-bg-hover);
+    color: var(--main-fg-hover);
+    cursor: default;
+}
 .text { 
     width: 100%;
 }
@@ -93,7 +98,7 @@ fieldset legend {
 }
 
 @media (hover: hover) {
-    .button:hover {
+    .button:hover:enabled {
         background-color: var(--main-bg-hover);
     }
 }
@@ -104,13 +109,24 @@ fieldset legend {
     text-align: left;   
 }
 
-
-
-
-
 /* ==========================================================================
 MODULE-SPECIFIC STYLES
 ========================================================================== */
+
+/**
+* === SECTOR EDITOR ===
+*/
+#sectorEditBox {
+    clear: both;
+    display: none;
+}
+#sectorEditButtonBox {
+
+}
+
+/**
+* === POLYGON STUFF ===
+*/
 .polysvg {
     max-width: 1000px;
 }
