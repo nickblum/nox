@@ -22,6 +22,25 @@ function addSector($title, $parentID = NULL ){
     return $ret;  //returns the second argument passed into the function
 }
 
+function deleteSector($sectorID){
+    $ret = new StdClass();
+    $ret->data = false;
+    $ret->haserror = false;
+    $ret->error = '';
+    
+    $conn = new mysqli($_SESSION["servername"], $_SESSION["username"], $_SESSION["password"], $_SESSION["dbname"]);
+    if ($conn->connect_error) {
+        $ret->error = $conn->connect_error;
+    }
+
+    $stmt = $conn->prepare("DELETE FROM sectors WHERE sector_id=?");
+    $stmt->bind_param("i",$sectorID);
+    $stmt->execute();
+    $conn->close();
+
+    return $ret;  //returns the second argument passed into the function
+}
+
 function loadSector($sectorID){
     $ret = new StdClass();
     $ret->data = false;
@@ -46,8 +65,11 @@ function loadSector($sectorID){
 if (isset($_POST['addSector'])) {
     $ret = addSector($_POST['title']);
     echo json_encode( $ret );
-} elseif (isset($_POST['loadSector'])) {
-    $ret = addSector($_POST['sector_id']);
+} elseif (isset($_POST['deleteSector'])) {
+    $ret = deleteSector($_POST['sectorID']);
+    echo json_encode( $ret );
+}elseif (isset($_POST['loadSector'])) {
+    $ret = loadSector($_POST['sectorID']);
     echo json_encode( $ret );
 } elseif (isset($_POST['updateSector'])) {
 

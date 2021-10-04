@@ -10,24 +10,17 @@ while($row = $qry->fetch_assoc()) {
 }
 
 $html = <<<HTML
-<form id="sectorBox">
-    <fieldset>
-        <legend>Sectors</legend>
-        $sectorDsp
-        <input placeholder="New Sector..." autocomplete="off" id="addSector" type="text" class="text">
-    </fieldset>
-</form>
-<form id="sectorEditBox">
-    <fieldset>
-        <legend></legend>
-        <div id="sectorEditButtonBox">
-            <input type="button" class="button" onclick="NOX.SETTINGS.cancelEdit();" value="<-">
-            <input type="button" class="button" value="[S]">
-            <input type="button" class="button" value="[T]">
-        </div>
-        <input placeholder="Sector Title (optional)" autocomplete="off" id="secTitle" type="text" class="text">
-    </fieldset>
-</form>
+<div id="sectorBox">
+    $sectorDsp
+    <input placeholder="New Sector..." autocomplete="off" id="addSector" type="text" class="text">
+</div>
+<div id="sectorEditBox">
+    <div id="sectorEditButtonBox">
+        <input type="button" id="sectorCancelBtn" class="button-icon left material-icons" onclick="NOX.SETTINGS.cancelEdit();" value="arrow_back">
+        <input type="button" id="sectorDeleteBtn" class="button-icon right material-icons" value="delete">
+    </div>
+    <input placeholder="Sector Title (optional)" autocomplete="off" id="secTitle" type="text" class="text">
+</div>
 HTML;
 
 $ret = new StdClass();

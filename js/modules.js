@@ -15,6 +15,20 @@ var NOX = ( function(){
   }
 })();
 
+NOX.UTIL = ( function(){
+  var fadeSwap = function($box1, $box2, complete){
+    $box1.fadeOut(50,function(){
+      $box2.fadeIn(50, function(){
+        if ( typeof complete !== 'undefined' ) complete();
+      });
+    })
+  }
+  return {
+    fadeSwap:fadeSwap,
+    init: function(){}
+  }
+})();
+
 /*
 * Handle menu and navigation stuff
 */
@@ -56,8 +70,13 @@ NOX.NAV = ( function(){
     $lastNav.after($newNav);
   }
 
+  var removeSector = function(sectorID){
+    $menuBox.find('[sector_id="'+sectorID+'"]').closest('a').remove();
+  }
+
   return {
     insertSector:insertSector,
+    removeSector:removeSector,
     init: function(){
       $main = $('#main')
       $hamburger = $('#hamburger');

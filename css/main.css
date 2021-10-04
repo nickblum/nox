@@ -62,26 +62,35 @@ fieldset {
     float: left;
     border-radius: .5em;
     border-color: var(--main-bg-light);
+    border: none;
 }
-fieldset legend {
-    padding: 0 .5em;      
+fieldset>legend {
+    padding: 0 44px;      
     font-size: x-large; 
     color: var(--main-bg-hover); 
 }
 .button,
+.button-icon,
 .text {
     height:40px; 
     color: var(--main-fg);
-    background-color: var(--main-bg);
-    border:2px solid var(--main-fg-hover);
-    border-radius: .5em;
+    border:1px solid var(--main-bg-light);
+    border-radius: .2em;
     box-sizing: border-box;
-    margin: .5% ;
+    margin: 3px 0;
     float:left;
     padding: 6px 12px;
     font-size: large;
+    text-align: left;
 }
-.button{
+.button {
+    background-color: var(--main-bg-light);
+}
+.text {
+    background-color: var(--main-bg);
+}
+.button,
+.button-icon{
     cursor:pointer;
 }
 .button:disabled{
@@ -92,7 +101,8 @@ fieldset legend {
 .text { 
     width: 100%;
 }
-.button:focus, .text:focus{
+.button:focus,
+.text:focus{
     outline: none !important;
     box-shadow: 0 0 6px #949597;
 }
@@ -100,14 +110,58 @@ fieldset legend {
 @media (hover: hover) {
     .button:hover:enabled {
         background-color: var(--main-bg-hover);
+        border-color: var(--main-bg-hover);
+    }
+    .button-icon:hover:enabled {
+        color: var(--main-fg-hover);
     }
 }
-
-.button-sector {
-    width: 100%;
-    background-color: var( --main-bg-light ); 
-    text-align: left;   
+.button-icon {
+    border: transparent;
+    background-color: transparent;
+    color: var(--main-fg-hover);
 }
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+/**
+* === MATERIAL DESIGN ICON STUFF ===
+* https://fonts.google.com/icons
+*/
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url("MaterialIconsSharp-Regular.otf") format("opentype");
+  }
+
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
 
 /* ==========================================================================
 MODULE-SPECIFIC STYLES
@@ -116,12 +170,22 @@ MODULE-SPECIFIC STYLES
 /**
 * === SECTOR EDITOR ===
 */
+#sectorEditBox,
+#sectorBox  {
+    width: 100%;
+    max-width: var(--main-width);
+}
 #sectorEditBox {
     clear: both;
     display: none;
 }
 #sectorEditButtonBox {
+    margin-top: -10px;
+    /*margin-left: -26px;*/
+}
 
+.button-sector {
+    width: 100%;
 }
 
 /**
