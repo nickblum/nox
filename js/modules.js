@@ -55,6 +55,10 @@ NOX.NAV = ( function(){
               $main.empty();
               $main[0].insertAdjacentHTML('afterbegin', result.data);
               $navdsp.html( el.nextSibling.innerHTML );
+
+              if ( typeof result.callback !== 'undefined' ){
+                NOX[result.callback].init();
+              }
           },
           error:function(){ alert('KABOOOOM!!'); }
       });

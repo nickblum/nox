@@ -168,6 +168,14 @@ MODULE-SPECIFIC STYLES
 ========================================================================== */
 
 /**
+* === GRUB ===
+*/
+#grubBox {
+    width: 100%;
+    max-width: var(--main-width);
+}
+
+/**
 * === SECTOR EDITOR ===
 */
 #sectorEditBox,
