@@ -113,19 +113,30 @@ fieldset>legend {
         border-color: var(--main-bg-hover);
     }
     .button-icon:hover:enabled {
-        color: var(--main-fg-hover);
+       /* filter: drop-shadow(0px 0px 4px red);
+        text-shadow: 0px 0px 10px white;
+        transition: text-shadow 0.3s ease;*/
     }
 }
 .button-icon {
     border: transparent;
     background-color: transparent;
     color: var(--main-fg-hover);
+    outline: none;
+    font-size: large;
 }
+.button-icon:active {
+    color: var(--main-fg);
+}
+
 .right {
     float: right;
 }
 .left {
     float: left;
+}
+.bold {
+    font-weight: 700;
 }
 /**
 * === MATERIAL DESIGN ICON STUFF ===
@@ -167,31 +178,42 @@ fieldset>legend {
 MODULE-SPECIFIC STYLES
 ========================================================================== */
 
+.action-box,
+.edit-box,
+.result-box {
+    width: 100%;
+    max-width: var(--main-width);
+    overflow: auto;
+}
+.edit-box {
+    clear: both;
+    display: none;
+}
+.result-box {
+    padding: 4px;
+    border: 1px solid var(--main-fg-hover);
+    border-radius: .2em;
+    margin: 3px 0;
+}
+.edit-button-box {
+    margin-top: -10px;
+}
+
 /**
 * === GRUB ===
 */
-#grubBox {
-    width: 100%;
-    max-width: var(--main-width);
+#grubOmniBox {
+    width: 86%;
+}
+#grubOmniAdd {
+    width: 14%;
+    text-align: center;
+    margin-top: 0px;
 }
 
 /**
 * === SECTOR EDITOR ===
 */
-#sectorEditBox,
-#sectorBox  {
-    width: 100%;
-    max-width: var(--main-width);
-}
-#sectorEditBox {
-    clear: both;
-    display: none;
-}
-#sectorEditButtonBox {
-    margin-top: -10px;
-    /*margin-left: -26px;*/
-}
-
 .button-sector {
     width: 100%;
 }

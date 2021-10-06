@@ -10,12 +10,12 @@ while($row = $qry->fetch_assoc()) {
 }
 
 $html = <<<HTML
-<div id="sectorBox">
+<div id="sectorBox" class="action-box">
     $sectorDsp
     <input placeholder="New Sector..." autocomplete="off" id="addSector" type="text" class="text">
 </div>
-<div id="sectorEditBox">
-    <div id="sectorEditButtonBox">
+<div id="sectorEditBox" class="edit-box">
+    <div id="sectorEditButtonBox" class="edit-button-box">
         <input type="button" id="sectorCancelBtn" class="button-icon left material-icons" onclick="NOX.SETTINGS.cancelEdit();" value="arrow_back">
         <input type="button" id="sectorDeleteBtn" class="button-icon right material-icons" value="delete">
     </div>

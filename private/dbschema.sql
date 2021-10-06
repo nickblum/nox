@@ -7,7 +7,7 @@ CREATE TABLE sectors (
 ---------------------- 
 -- MEAL PLANNER
 ----------------------
-CREATE TABLE meal_recipes (
+CREATE TABLE grub_recipes (
     recipe_id SERIAL PRIMARY KEY,
     title VARCHAR(255),
     directions VARCHAR(1000),
@@ -15,7 +15,7 @@ CREATE TABLE meal_recipes (
     preptime INTEGER -- minutes
 );
 
-CREATE TABLE meal_ingredients (
+CREATE TABLE grub_ingredients (
     recipe_id INTEGER, -- FK recipes
     food_id INTEGER, -- FK food
     note VARCHAR(255),
@@ -23,7 +23,7 @@ CREATE TABLE meal_ingredients (
     qty_type_id INTEGER -- FK  
 );
 
-CREATE TABLE meal_food (
+CREATE TABLE grub_food (
     food_id SERIAL PRIMARY KEY,
     title VARCHAR(255),
     default_qty FLOAT, -- default

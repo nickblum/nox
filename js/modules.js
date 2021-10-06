@@ -98,7 +98,7 @@ NOX.NAV = ( function(){
       });
       
       // load homestead/dashboard on init
-      $( '.navrad' ).eq(-2).trigger('click');
+      $( '.navrad' ).eq(-3).trigger('click');
     }
   }
 })();
