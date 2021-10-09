@@ -10,6 +10,7 @@
   <head>
     <title>NOX</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/grow-wrap.css">
     <link rel="stylesheet" type="text/css" href="css/topnav.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.tagsinput-revisited.css">

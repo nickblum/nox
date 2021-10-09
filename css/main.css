@@ -9,6 +9,8 @@ SITE STRUCTURE
     --main-fg-hover: #c7c7c7;
     --main-fg-highlight: #ebe9ec;
     --main-width: 400px;
+    --main-input-width: 40px;
+    --main-input-br: .2em; /* border radius*/
 }
 * {
     margin: 0;
@@ -56,6 +58,7 @@ form {
     width: 100%;
     max-width: var(--main-width);
     float:left;
+    padding-bottom: 20px;
 }
 fieldset {
     padding: 16px;
@@ -72,16 +75,22 @@ fieldset>legend {
 .button,
 .button-icon,
 .text {
-    height:40px; 
+    height:var(--main-input-width); 
     color: var(--main-fg);
     border:1px solid var(--main-bg-light);
-    border-radius: .2em;
+    border-radius: var(--main-input-br);
     box-sizing: border-box;
     margin: 3px 0;
     float:left;
     padding: 6px 12px;
     font-size: large;
     text-align: left;
+}
+.textarea {
+    color: var(--main-fg);
+    border:1px solid var(--main-bg-light);
+    border-radius: var(--main-input-br);
+    background-color: transparent;
 }
 .button {
     background-color: var(--main-bg-light);
@@ -102,9 +111,32 @@ fieldset>legend {
     width: 100%;
 }
 .button:focus,
-.text:focus{
+.text:focus,
+.textarea:focus {
     outline: none !important;
-    box-shadow: 0 0 6px #949597;
+    box-shadow: 0 0 1px white;
+}
+
+.select {
+    display: block;
+    float:left;
+    background-color: transparent;
+    height: var(--main-input-width);
+    color: var(--main-fg);
+    border-radius: var(--main-input-br);
+    border:1px solid var(--main-bg-light);
+    margin-top: 3px;
+}
+.select:focus {
+    outline: none;
+}
+
+.label {
+    display: block;
+    float: left;
+    width: 100%;
+    margin-top: 14px;
+    font-size: medium;
 }
 
 @media (hover: hover) {
@@ -129,15 +161,20 @@ fieldset>legend {
     color: var(--main-fg);
 }
 
-.right {
-    float: right;
-}
-.left {
-    float: left;
-}
-.bold {
-    font-weight: 700;
-}
+/**
+* === FORM ELEMENTS ===
+*/
+.bold {font-weight: 700;}
+.clear{clear: both;}
+.left { float: left;}
+.right { float: right; }
+
+
+
+.w20 {width: 20%;}
+.w40 {width: 40%;}
+.w60 {width: 60%;}
+
 /**
 * === MATERIAL DESIGN ICON STUFF ===
 * https://fonts.google.com/icons
@@ -184,6 +221,7 @@ MODULE-SPECIFIC STYLES
     width: 100%;
     max-width: var(--main-width);
     overflow: auto;
+    display: block;
 }
 .edit-box {
     clear: both;
