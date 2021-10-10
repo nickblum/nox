@@ -36,19 +36,8 @@ $html = <<<HTML
         <input type="text" placeholder="dd:hh" class="text w40" name="notice_duration">
     </p>
     <p>
-        <label for="" class="label">Time</label>
-        <div class="duration-box">
-            <input type="text" class="duration duration-d" size="3" increment="1" value="00">
-            <div class="duration">Day</div>
-            <input type="text" class="duration duration-h" size="2" increment="1" value="00">
-            <div class="duration">Hrs</div>
-            <input type="text" class="duration duration-m" size="2" increment="15" value="00">
-            <div class="duration">Min</div>
-            <input type="button" class="duration duration-updown material-icons" value="arrow_upward">
-            <input type="button" class="duration duration-updown material-icons" value="arrow_downward">
-        </div>
-
-
+        <label for="grubPrepTime" class="label">Time</label>
+        <div id="grubPrepTime"></div>
     </p>
     <p>
         <label for="" class="label">Instructions</label>

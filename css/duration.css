@@ -30,7 +30,7 @@
 .duration-box > input.duration {
     font-size: large;
 }
-.duration-box > div.duration {
+.duration-box > label.duration {
     font-size: small;
     line-height: 40px;
     width: 32px;

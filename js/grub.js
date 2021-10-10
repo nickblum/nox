@@ -56,7 +56,7 @@ NOX.GRUB = (function(){
                     var $recipeBox = $('#grubRecipeBox');
                     $recipeBox.empty();
                     for ( var i = 0; i < result.data.length; i++ ) {
-                        console.log(result.data[i].title);
+                        //console.log(result.data[i].title);
                         $recipeBox.append( 
                             $('<div class="result-box" onclick="NOX.GRUB.loadRecipe('+ result.data[i].recipe_id +');">')
                                 .html( result.data[i].title ) 
@@ -125,8 +125,8 @@ NOX.GRUB = (function(){
             $('#grubCancelBtn').on('click',NOX.GRUB.cancelEdit);
             $('#grubDeleteBtn').on('click',NOX.GRUB.deleteRecipe);
 
-            NOX.DURATION.init();
-
+            //NOX.DURATION.init();
+            $('#grubPrepTime').durationjs();
         }
     }
 })();
