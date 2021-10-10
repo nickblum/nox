@@ -9,7 +9,7 @@ SITE STRUCTURE
     --main-fg-hover: #c7c7c7;
     --main-fg-highlight: #ebe9ec;
     --main-width: 400px;
-    --main-input-width: 40px;
+    --main-input-height: 40px;
     --main-input-br: .2em; /* border radius*/
 }
 * {
@@ -75,7 +75,7 @@ fieldset>legend {
 .button,
 .button-icon,
 .text {
-    height:var(--main-input-width); 
+    height:var(--main-input-height); 
     color: var(--main-fg);
     border:1px solid var(--main-bg-light);
     border-radius: var(--main-input-br);
@@ -121,7 +121,7 @@ fieldset>legend {
     display: block;
     float:left;
     background-color: transparent;
-    height: var(--main-input-width);
+    height: var(--main-input-height);
     color: var(--main-fg);
     border-radius: var(--main-input-br);
     border:1px solid var(--main-bg-light);
@@ -137,6 +137,7 @@ fieldset>legend {
     width: 100%;
     margin-top: 14px;
     font-size: medium;
+    font-weight: 100;
 }
 
 @media (hover: hover) {

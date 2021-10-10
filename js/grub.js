@@ -124,6 +124,9 @@ NOX.GRUB = (function(){
             $('#grubOmniAdd').on('click', NOX.GRUB.addRecipe);
             $('#grubCancelBtn').on('click',NOX.GRUB.cancelEdit);
             $('#grubDeleteBtn').on('click',NOX.GRUB.deleteRecipe);
+
+            NOX.DURATION.init();
+
         }
     }
 })();

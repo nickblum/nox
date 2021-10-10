@@ -37,8 +37,18 @@ $html = <<<HTML
     </p>
     <p>
         <label for="" class="label">Time</label>
-        <input placeholder="hh:mm" type="text" class="text w20" name="">
-        <input placeholder="hh:mm" type="text" class="text w20 clear" name="">
+        <div class="duration-box">
+            <input type="text" class="duration duration-d" size="3" increment="1" value="00">
+            <div class="duration">Day</div>
+            <input type="text" class="duration duration-h" size="2" increment="1" value="00">
+            <div class="duration">Hrs</div>
+            <input type="text" class="duration duration-m" size="2" increment="15" value="00">
+            <div class="duration">Min</div>
+            <input type="button" class="duration duration-updown material-icons" value="arrow_upward">
+            <input type="button" class="duration duration-updown material-icons" value="arrow_downward">
+        </div>
+
+
     </p>
     <p>
         <label for="" class="label">Instructions</label>
