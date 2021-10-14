@@ -9,21 +9,16 @@ $html = <<<HTML
     <div id="grubRecipeBox" class="edit-box"></div>
 </div>
 <form id="grubEditBox" class="edit-box" style="display:block;">
-    <p class="edit-bottom-box">
+    <p class="edit-button-box">
         <input type="button" id="grubCancelBtn" class="button-icon left material-icons" onclick="NOX.GRUB.cancelEdit();" value="arrow_back">
         <input type="button" id="grubDeleteBtn" class="button-icon right material-icons" value="delete">
     </p>
-    <!--
-    <div class="edit-button-box">
-        <input type="button" id="grubCancelBtn" class="button-icon left material-icons" onclick="NOX.GRUB.cancelEdit();" value="arrow_back">
-        <input type="button" id="grubDeleteBtn" class="button-icon right material-icons" value="delete">
-    </div>-->
     <p>
         <input placeholder="Recipe Name" autocomplete="off" id="recipeTitle" type="text" class="text">
     </p>
     <p>
         <label for="grubDifficulty" class="label">Difficulty</label>
-        <select id="grubDifficulty" name="effort" class="select w20 clear">
+        <select id="grubDifficulty" name="effort" class="select w25 clear">
             <option value="1">1 (Easy)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -32,12 +27,16 @@ $html = <<<HTML
         </select>
     </p>
     <p>
-        <label for="" class="label">Notice Required</label>
-        <input type="text" placeholder="dd:hh" class="text w40" name="notice_duration">
+        <label for="grubPrepTime" class="label">Prep Time</label>
+        <div id="grubPrepTime"></div>
     </p>
     <p>
-        <label for="grubPrepTime" class="label">Time</label>
-        <div id="grubPrepTime"></div>
+        <label for="grubCookTime" class="label">Cook Time</label>
+        <div id="grubCookTime"></div>
+    </p>
+    <p>
+        <label for="grubSchedTime" class="label">Schedule Notice</label>
+        <div id="grubSchedTime"></div>
     </p>
     <p>
         <label for="" class="label">Instructions</label>

@@ -1,5 +1,7 @@
 (function( $ ) {
-    $.fn.durationjs = function( settings ) {
+    $.fn.durationjs = function( settings={} ) {
+        var $this = $( this );
+        var $lastInput;
         var settings = $.extend({
             display: 'dhm', // days hours & minues by default; must be sequential (i.e., no 'dms')
             sInc: 1,
@@ -10,71 +12,86 @@
         }, settings );
         
         var tUnits = {
-            s: { dsp: "Sec", inc: settings.sInc, val: 0, max: 59, rate: 1}, // default save value in seconds, 1 = 1
-            m: { dsp: "Min", inc: settings.mInc, val: 0, max: 59, rate: 60},// 60 secs per min, ...
-            h: { dsp: "Hrs", inc: settings.hInc, val: 0, max: 23, rate: 3600},
-            d: { dsp: "Day", inc: settings.dInc, val: 0, max: 364, rate: 86400}
+            s: { dsp: "Sec", inc: settings.sInc, val: 0, max: 60, rate: 1}, // default save value in seconds, 1 = 1
+            m: { dsp: "Min", inc: settings.mInc, val: 0, max: 60, rate: 60},// 60 secs per min, ...
+            h: { dsp: "Hrs", inc: settings.hInc, val: 0, max: 24, rate: 3600},
+            d: { dsp: "Day", inc: settings.dInc, val: 0, max: 365, rate: 86400}
         }
-
         // Calculate initialiation values
 
+        // increment value on up/down button and up/down keypress
+        var actionUpDown = function($input, goUp, selectIt = false ){
+            // get input unit type
+            var tUnit = $input.attr('tunit');
+
+            // get input starting value
+            var newVal = parseInt($input.val(), 10);
+            newVal = ( isNaN( newVal ) ? 0 : newVal );
+            newVal += ( goUp ? 1 : -1 ) * tUnits[tUnit].inc; 
+            
+            // check if newVal is out of range for input
+            // if applicable, increment/decrement sibling input
+            if (  newVal <= 0 || newVal >= tUnits[tUnit].max ) {
+                if ( newVal == 0 || ( newVal < 0 && $input.index() < 2 ) ){
+                    newVal = "00";
+                } else if ( $input.index() >= 2 ){
+                    let $nextUnit = $input.prev().prev();
+                    let nextUnitVal = parseInt($nextUnit.val());
+                    
+                    if ( newVal < 0 && nextUnitVal > 0 ) {
+                        $nextUnit.val( nextUnitVal - 1 ).trigger('blur');
+                        newVal = tUnits[tUnit].max - tUnits[tUnit].inc;
+                    } else if ( newVal > 0 ) {
+                        $nextUnit.val( nextUnitVal + 1).trigger('blur');
+                        newVal = "00";
+                    } else {
+                        newVal = "00";
+                    }
+                }
+            } 
+            
+            $input.val(newVal)[ selectIt ? 'select' : 'blur']();
+            return false;
+        }
+
         // Build the HTML inputs
-        $box = $('<div class="duration-box">');
-        let inputTypes = settings.display.split("");
+        var $box = $('<div class="duration-box">');
+        var inputTypes = settings.display.split("");
         inputTypes.forEach(function (unit) {
             let inputVal = (tUnits[unit].val).toString().padStart(2,'0');
-            let $input = $('<input type="text" class="duration duration-val">').attr('tunit',unit).val(inputVal);
+            let $input = $('<input type="text" maxlength="2" class="duration duration-val">').attr('tunit',unit).val(inputVal);
             let $label = $('<label class="duration">').html( tUnits[unit].dsp )
             
             //add listeners
-            $input.on('focus',function(){ this.select() });
+            $input.on('focus',function(){ 
+                $lastInput = $( this );
+                this.select() 
+            });
+            $input.on('blur',function(){ 
+                if ( isNaN( this.value ) ) this.value = '00';
+                this.value = this.value.toString().padStart(2,0); 
+            });
             $input.on('keyup',function( e ){ 
-                console.log( $(this).index() );
-
-                var tunit = this.getAttribute('tunit');
-                var newVal = parseInt(this.value.replace(/\D/g,''), 10);
-                if ( isNaN( newVal ) ) {
-                    newVal = '00';
-                
-                // If keypress up/down keys
-                } else if ( e.which == 38 || e.which == 40 ) { 
-                    // add or subtract increment
-                    newVal += ( e.which == 38 ? 1 : -1 ) * tUnits[tunit].inc; 
-                    if ( newVal >= tUnits[tunit].max && $(this).index() >= 2 ) {
-                        newVal = '00';
-                        let $nextUnit = $( this ).parent().children().eq( $(this).index() - 2 );
-                        
-                        /*
-                            need to increment by 1
-                        */
-                        this.value = newVal.toString().padStart(2,0);
-                        $nextUnit.select()
-                        return false;
-                    } else if ( newVal < 0 ) {
-                        
-                    }
+                // remove non-integer characters
+                this.value = this.value.replace(/\D/g,'');
+                    
+                // if up (38) or down (40) keypress, increment/decrement value
+                if ( e.which == 38 || e.which == 40 ) { 
+                    return actionUpDown( $(this), ( e.which == 38 ), true );
                 } 
-                
-                this.value = newVal.toString().padStart(2,0);
-                this.select();
-                // if up/down keys, increment decrement
             });
             $box.append( $input, $label );
         });
         var $btnUp = $( '<input type="button" class="duration duration-updown material-icons" value="arrow_upward">' );
         var $btnDown = $( '<input type="button" class="duration duration-updown material-icons" value="arrow_downward">' );
         $box.append($btnUp,$btnDown);
-        $box.$lastInput = $box.find('.duration-val').last();
+        $lastInput = $box.find('.duration-val').last();
         
-        // Add listeners
-        $btnUp.on('click',function(){
-            
-            
-            let val = parseInt($box.$lastInput.val());
-            let increment = tUnits[($box.$lastInput.attr('tunit'))].inc;
-        });
+        // Add button listeners
+        $btnUp.on('click',function(){ actionUpDown( $lastInput, true ); });
+        $btnDown.on('click',function(){ actionUpDown( $lastInput, false ); });
 
-        this.append( $box );
+        $this.append( $box );
     };
  
 }( jQuery ));

@@ -127,6 +127,8 @@ NOX.GRUB = (function(){
 
             //NOX.DURATION.init();
             $('#grubPrepTime').durationjs();
+            $('#grubCookTime').durationjs();
+            $('#grubSchedTime').durationjs();
         }
     }
 })();
